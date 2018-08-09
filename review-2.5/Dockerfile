@@ -21,6 +21,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       texlive-lang-japanese texlive-fonts-recommended texlive-latex-extra lmodern fonts-lmodern tex-gyre fonts-texgyre texlive-pictures \
       texlive-fonts-extra texlive-generic-recommended \
+      fonts-noto fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji \
       ghostscript gsfonts zip ruby-zip ruby-nokogiri mecab ruby-mecab mecab-ipadic-utf8 poppler-data cm-super \
       graphviz gnuplot python-blockdiag python-aafigure && \
     apt-get clean && \
@@ -46,10 +47,6 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     npm install -g yarn
-
-# install noto font from backports
-RUN echo "deb http://ftp.jp.debian.org/debian/ stretch-backports main" >> /etc/apt/sources.list
-RUN apt-get update && apt-get -y install fonts-noto-cjk/stretch-backports fonts-noto-cjk-extra/stretch-backports
 
 ## install font map of noto for dvipdfmx
 COPY noto/ /usr/share/texlive/texmf-dist/fonts/map/dvipdfmx/ptex-fontmaps/noto/
