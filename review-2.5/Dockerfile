@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-LABEL maintainer="vvakame@gmail.com"
+LABEL description="for reviewstarter with Re:VIEW 2.5"
 
 ENV REVIEW_VERSION 2.5.0
 ENV REVIEW_PEG_VERSION 0.2.2
