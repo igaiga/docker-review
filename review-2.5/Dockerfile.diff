@@ -1,0 +1,44 @@
+--- Dockerfile	2018-08-09 20:19:31.000000000 +0900
++++ Dockerfile	2018-08-09 20:36:04.000000000 +0900
+@@ -1,5 +1,5 @@
+-FROM debian:stretch-slim
+-LABEL maintainer="vvakame@gmail.com"
++FROM ubuntu:18.04
++LABEL description="for reviewstarter with Re:VIEW 2.5"
+ 
+ ENV REVIEW_VERSION 2.5.0
+ ENV REVIEW_PEG_VERSION 0.2.2
+@@ -20,6 +20,8 @@
+ RUN apt-get update && \
+     apt-get install -y --no-install-recommends \
+       texlive-lang-japanese texlive-fonts-recommended texlive-latex-extra lmodern fonts-lmodern tex-gyre fonts-texgyre texlive-pictures \
++      texlive-fonts-extra texlive-generic-recommended \
++      fonts-noto fonts-noto-cjk fonts-noto-cjk-extra fonts-noto-color-emoji \
+       ghostscript gsfonts zip ruby-zip ruby-nokogiri mecab ruby-mecab mecab-ipadic-utf8 poppler-data cm-super \
+       graphviz gnuplot python-blockdiag python-aafigure && \
+     apt-get clean && \
+@@ -28,9 +30,10 @@
+ # RUN kanji-config-updmap ipaex
+ 
+ # setup Re:VIEW
+-RUN gem install bundler rake --no-rdoc --no-ri && \
+-    gem install review -v "$REVIEW_VERSION" --no-rdoc --no-ri && \
+-    gem install review-peg -v "$REVIEW_PEG_VERSION" --no-rdoc --no-ri
++RUN gem install -N bundler rake && \
++    gem install -N combine_pdf && \
++    gem install -N review -v "$REVIEW_VERSION" && \
++    gem install -N review-peg -v "$REVIEW_PEG_VERSION"
+ 
+ # install node.js environment
+ RUN apt-get update && \
+@@ -46,10 +49,6 @@
+     rm -rf /var/lib/apt/lists/* && \
+     npm install -g yarn
+ 
+-# install noto font from backports
+-RUN echo "deb http://ftp.jp.debian.org/debian/ stretch-backports main" >> /etc/apt/sources.list
+-RUN apt-get update && apt-get -y install fonts-noto-cjk/stretch-backports fonts-noto-cjk-extra/stretch-backports
+-
+ ## install font map of noto for dvipdfmx
+ COPY noto/ /usr/share/texlive/texmf-dist/fonts/map/dvipdfmx/ptex-fontmaps/noto/
+ 
