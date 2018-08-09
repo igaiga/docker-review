@@ -31,6 +31,7 @@ RUN apt-get update && \
 
 # setup Re:VIEW
 RUN gem install -N bundler rake && \
+    gem install -N combine_pdf && \
     gem install -N review -v "$REVIEW_VERSION" && \
     gem install -N review-peg -v "$REVIEW_PEG_VERSION"
 
