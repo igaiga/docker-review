@@ -30,9 +30,9 @@ RUN apt-get update && \
 # RUN kanji-config-updmap ipaex
 
 # setup Re:VIEW
-RUN gem install bundler rake --no-rdoc --no-ri && \
-    gem install review -v "$REVIEW_VERSION" --no-rdoc --no-ri && \
-    gem install review-peg -v "$REVIEW_PEG_VERSION" --no-rdoc --no-ri
+RUN gem install -N bundler rake && \
+    gem install -N review -v "$REVIEW_VERSION" && \
+    gem install -N review-peg -v "$REVIEW_PEG_VERSION"
 
 # install node.js environment
 RUN apt-get update && \
