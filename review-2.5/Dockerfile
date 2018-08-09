@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM ubuntu:18.04
 LABEL maintainer="vvakame@gmail.com"
 
 ENV REVIEW_VERSION 2.5.0
